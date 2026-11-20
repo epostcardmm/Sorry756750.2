@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Question For You ✨</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pyidaungsu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #ff7eb3, #ff758c, #70a1ff, #2ed573, #ffbe76, #ff4757);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bg-shape {
+      position: absolute;
+      font-size: 24px;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.8);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 255, 255, 0.5);
+      text-align: center;
+      max-width: 440px;
+      width: 90%;
+      z-index: 10;
+      transition: all 0.4s ease;
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      position: relative;
+    }
+
+    .step-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      background: linear-gradient(45deg, #ff4757, #ff758c);
+      color: white;
+      font-weight: bold;
+      font-size: 13px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .gif-container img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      border: 4px solid #ffffff;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      min-height: 50px;
+    }
+
+    .btn-group.swapped {
+      flex-direction: row-reverse;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      touch-action: manipulation;
+      user-select: none;
+    }
+
+    .btn-yes {
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+    }
+    .btn-yes:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+    }
+
+    .btn-no {
+      background: linear-gradient(45deg, #a8c0ff, #3f2b96);
+      color: white;
+      box-shadow: 0 4px 15px rgba(63, 43, 150, 0.3);
+      transition: all 0.2s ease-out;
+      z-index: 9999;
+    }
+
+    .btn-yes-step2 {
+      background: linear-gradient(45deg, #11998e, #38ef7d);
+      color: white;
+      box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+    }
+    .btn-yes-step2:hover {
+      transform: scale(1.08);
+    }
+
+    .btn-no-step2 {
+      background: linear-gradient(45deg, #ff9966, #ff5e62);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4);
+    }
+
+    .btn-yes-step3 {
+      background: linear-gradient(45deg, #ff007f, #7928ca);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+    }
+    .btn-yes-step3:hover {
+      transform: scale(1.08);
+    }
+
+    .btn-aung-step3 {
+      background: linear-gradient(45deg, #f857a6, #ff5858);
+      color: white;
+      box-shadow: 0 4px 15px rgba(248, 87, 166, 0.4);
+    }
+    .btn-aung-step3:hover {
+      transform: scale(1.08);
+    }
+
+    .btn-card {
+      background: linear-gradient(45deg, #2b5876, #4e4376);
+      color: white;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(43, 88, 118, 0.4);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .gift-section {
+      position: relative;
+      min-height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .gift-box {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .gift-body {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      width: 120px;
+      height: 95px;
+      background: linear-gradient(135deg, #ff4757, #ff6b81);
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 10px 25px rgba(255, 71, 87, 0.35);
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .gift-ribbon-v-body {
+      position: absolute;
+      top: 0;
+      left: 47px;
+      width: 26px;
+      height: 100%;
+      background: #ffd700;
+    }
+
+    .gift-ribbon-h-body {
+      position: absolute;
+      top: 35px;
+      left: 0;
+      width: 100%;
+      height: 26px;
+      background: #ffd700;
+    }
+
+    .gift-lid {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      width: 140px;
+      height: 35px;
+      background: linear-gradient(135deg, #ff6b81, #ee5253);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      z-index: 5;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .gift-ribbon-v-lid {
+      position: absolute;
+      top: 0;
+      left: 57px;
+      width: 26px;
+      height: 100%;
+      background: #ffd700;
+    }
+
+    .gift-bow {
+      position: absolute;
+      top: -24px;
+      left: 45px;
+      font-size: 42px;
+      z-index: 6;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+    }
+
+    .gift-box.open .gift-lid {
+      transform: translateY(-65px) rotate(-28deg);
+    }
+
+    .flying-kiss {
+      position: absolute;
+      font-weight: bold;
+      font-size: 16px;
+      color: #ff0055;
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 0, 85, 0.5);
+      pointer-events: none;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    @keyframes flyOut {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.4) rotate(15deg);
+      }
+    }
+
+    .btn-accept {
+      background: linear-gradient(45deg, #11998e, #38ef7d);
+      color: white;
+      box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+    }
+    .btn-accept:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-decline {
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+    }
+    .btn-decline:hover {
+      transform: scale(1.05);
+    }
+
+    .instruction-text {
+      font-size: 13px;
+      color: #555;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .warning-popup {
+      position: fixed;
+      padding: 10px 18px;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+      pointer-events: none;
+      animation: popup 1.5s ease-out forwards;
+      z-index: 10000;
+      white-space: nowrap;
+    }
+
+    .warning-theme-1 {
+      background: linear-gradient(45deg, #ff3366, #ff0055);
+    }
+
+    .warning-theme-2 {
+      background: linear-gradient(45deg, #7928ca, #ff0080);
+    }
+
+    @keyframes popup {
+      0% { opacity: 0; transform: translateY(0) scale(0.8); }
+      20% { opacity: 1; transform: translateY(-5px) scale(1.05); }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-25px) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="bgParticles"></div>
+
+  <div class="container" id="mainContainer"></div>
+
+  <script>
+    function createBgParticles() {
+      const container = document.getElementById('bgParticles');
+      const symbols = ['❤️', '💖', '✨', '🌸', '💕', '⭐', '🎈'];
+      for (let i = 0; i < 15; i++) {
+        const span = document.createElement('span');
+        span.className = 'bg-shape';
+        span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.animationDuration = (5 + Math.random() * 6) + 's';
+        span.style.animationDelay = (Math.random() * 5) + 's';
+        span.style.fontSize = (16 + Math.random() * 20) + 'px';
+        container.appendChild(span);
+      }
+    }
+    createBgParticles();
+
+    const warningsStep1 = [
+      "တကယ် လုံးဝ မလာတော့ဘူးလား? 🥺",
+      "သေချာ စဉ်းစားပါဦး... 💔",
+      "No ကို မနှိပ်ပါနဲ့တော့နော်! 😭",
+      "စိတ်ဆိုးပြေပါတော့နော်... 🙏",
+      "ပြန်လာခဲ့ပါနော်... ✨",
+      "မနှိပ်ပါနဲ့တော့ ဆိုမှ... 🙈"
+    ];
+
+    const warningsStep2 = [
+      "မိအောင် နှိပ်ကြည့်ပါဦး~ 😜",
+      "နေရာချင်း လဲသွားပြီနော်! 🤪",
+      "ဖမ်းလို့ မရဘူးလေ~ 👻",
+      "ခွင့်လွှတ်ပေးမှာပါ ကွာ... 🥰",
+      "မရဘူး... Yes ပဲ နှိပ်ရမယ်! 😛",
+      "ဟဲဟဲ နေရာပြောင်းသွားပြီ! 💖"
+    ];
+
+    let currentStep = 1;
+    let warningIndexStep1 = 0;
+    let warningIndexStep2 = 0;
+    let yesScaleStep1 = 1;
+    let isSwappedStep2 = false;
+
+    let step1NoClicks = 0;
+    let step2Choice = "";
+    let step3Choice = "";
+
+    renderStep();
+
+    function renderStep() {
+      const container = document.getElementById('mainContainer');
+
+      if (currentStep === 1) {
+        container.innerHTML = `
+          <div class="step-badge">အဆင့် (၁ / ၃) ✨</div>
+          <div class="gif-container">
+            <img id="gifImage" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHFxcTBzMTQzeXU3bmRyemYzYTdwczlrY2xyNXJtaDJreHpxb3pjaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tXL4FHPSnVJ0A/giphy.gif" alt="Sad Cute Gif">
+          </div>
+          <h1 id="questionText">စိတ်ကောက်ပြေပါတော့ ရည်းစားလေး... 🥺</h1>
+          <div class="btn-group">
+            <button class="btn-yes" id="yesBtn1" onclick="nextStep(2)">YES ❤️</button>
+            <button class="btn-no" id="noBtn1" onclick="handleNoStep1()">NO 💔</button>
+          </div>
+        `;
+      } else if (currentStep === 2) {
+        container.innerHTML = `
+          <div class="step-badge" style="background: linear-gradient(45deg, #11998e, #38ef7d);">အဆင့် (၂ / ၃) 🌿</div>
+          <div class="gif-container">
+            <img id="gifImage" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWNuZXd5c2VyeWoyYTFpNmlzMGNkYW0wNGFodHAxb3pzYjQ4bDR4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cFgb5p5e1My3K/giphy.gif" alt="Teasing Cute Gif">
+          </div>
+          <h1 id="questionText">ဒါဆို တကယ် ခွင့်လွှတ်ပေးတော့မှာလား... 👉👈</h1>
+          <div class="btn-group ${isSwappedStep2 ? 'swapped' : ''}" id="btnGroup2">
+            <button class="btn-yes-step2" id="yesBtn2" onclick="chooseStep2('YES 🥰')">YES 🥰</button>
+            <button class="btn-no-step2" id="noBtn2" onclick="handleNoStep2()" onmouseenter="handleNoStep2Hover()" ontouchstart="handleNoStep2Touch(event)">NO 😜</button>
+          </div>
+        `;
+      } else if (currentStep === 3) {
+        container.innerHTML = `
+          <div class="step-badge" style="background: linear-gradient(45deg, #ff007f, #7928ca);">အဆင့် (၃ / ၃) 💕</div>
+          <div class="gif-container">
+            <img id="gifImage" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa295OXAyMjJtcGtjb252MGFkMnR6cmxlMnEzNHV0M3F1ZHA5MXJlOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yVZrYMkdgY5Pi/giphy.gif" alt="Super Cute Gif">
+          </div>
+          <h1 id="questionText">ဒါဆို အရင်လို ပြန်ချစ်ကြမယ်နော်... ❤️</h1>
+          <div class="btn-group">
+            <button class="btn-yes-step3" onclick="finishQuestions('YES 💖')">YES 💖</button>
+            <button class="btn-aung-step3" onclick="finishQuestions('အင်း 🌸')">အင်း 🌸</button>
+          </div>
+        `;
+      }
+    }
+
+    function nextStep(step) {
+      const floatingNo = document.getElementById('noBtn1');
+      if (floatingNo) floatingNo.remove();
+
+      currentStep = step;
+      renderStep();
+    }
+
+    function chooseStep2(choice) {
+      step2Choice = choice;
+      nextStep(3);
+    }
+
+    function handleNoStep1() {
+      step1NoClicks++;
+
+      const noBtn = document.getElementById('noBtn1');
+      const yesBtn = document.getElementById('yesBtn1');
+
+      if (!noBtn || !yesBtn) return;
+
+      if (noBtn.parentElement !== document.body) {
+        document.body.appendChild(noBtn);
+      }
+
+      const btnWidth = noBtn.offsetWidth || 100;
+      const btnHeight = noBtn.offsetHeight || 45;
+
+      const minX = 20;
+      const maxX = Math.max(minX, window.innerWidth - btnWidth - 20);
+
+      const minY = 70;
+      const maxY = Math.max(minY, window.innerHeight - btnHeight - 30);
+
+      const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+      const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+      noBtn.style.zIndex = '9999';
+
+      yesScaleStep1 += 0.15;
+      yesBtn.style.transform = `scale(${yesScaleStep1})`;
+
+      const warningY = randomY - 45;
+      showWarning(randomX, warningY, warningsStep1[warningIndexStep1 % warningsStep1.length], 'warning-theme-1');
+      warningIndexStep1++;
+    }
+
+    function handleNoStep2() {
+      swapButtonsStep2();
+    }
+
+    function handleNoStep2Hover() {
+      swapButtonsStep2();
+    }
+
+    function handleNoStep2Touch(e) {
+      e.preventDefault();
+      swapButtonsStep2();
+    }
+
+    function swapButtonsStep2() {
+      const btnGroup = document.getElementById('btnGroup2');
+      const noBtn = document.getElementById('noBtn2');
+      
+      isSwappedStep2 = !isSwappedStep2;
+      if (btnGroup) {
+        if (isSwappedStep2) {
+          btnGroup.classList.add('swapped');
+        } else {
+          btnGroup.classList.remove('swapped');
+        }
+      }
+
+      if (noBtn) {
+        const rect = noBtn.getBoundingClientRect();
+        showWarning(rect.left, rect.top - 45, warningsStep2[warningIndexStep2 % warningsStep2.length], 'warning-theme-2');
+        warningIndexStep2++;
+      }
+    }
+
+    function finishQuestions(choiceText) {
+      step3Choice = choiceText;
+      handleYesFinal(choiceText);
+    }
+
+    function showWarning(x, y, text, themeClass) {
+      const warning = document.createElement('div');
+      warning.className = `warning-popup ${themeClass}`;
+      warning.innerText = text;
+
+      const safeX = Math.min(window.innerWidth - 200, Math.max(10, x));
+      const safeY = Math.max(10, y);
+
+      warning.style.left = `${safeX}px`;
+      warning.style.top = `${safeY}px`;
+
+      document.body.appendChild(warning);
+
+      setTimeout(() => {
+        warning.remove();
+      }, 1500);
+    }
+
+    function handleYesFinal(choiceText = 'YES') {
+      const container = document.getElementById('mainContainer');
+      
+      container.innerHTML = `
+        <div class="gif-container">
+          <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXB6bGRxajZydTg5bm85cjhtaXkwdmp2d2d2a2Z0YmczODB1anY0MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NxC8VtyxqhMtpLoEEN/giphy.gif" alt="Happy Gif">
+        </div>
+        <h1>Yay! '${choiceText}' လို့ ဖြေပေးလို့ ကျေးဇူးပါ! ❤️✨</h1>
+        <button class="btn-card" onclick="goToGiftPage()">Special Gift For You 🎁</button>
+      `;
+    }
+
+    function goToGiftPage() {
+      const container = document.getElementById('mainContainer');
+      
+      container.innerHTML = `
+        <h1 style="margin-bottom: 5px; color: #ff2a74;">🎁 Special Gift For You</h1>
+        
+        <div class="gift-section" id="giftBoxContainer">
+          <div class="gift-box" id="giftBox" onclick="openGift()">
+            <div class="gift-lid">
+              <div class="gift-bow">🎀</div>
+              <div class="gift-ribbon-v-lid"></div>
+            </div>
+            <div class="gift-body">
+              <div class="gift-ribbon-v-body"></div>
+              <div class="gift-ribbon-h-body"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="instruction-text" id="instructText" style="margin-bottom: 20px;">
+          👆 လက်ဆောင်ပုံးလေးကို နှိပ်ပြီး ဖွင့်ကြည့်ပါဦး ✨
+        </p>
+
+        <div class="btn-group" id="responseArea" style="gap: 12px; display: flex; justify-content: center;">
+          <button class="btn-accept" onclick="sendResponse(event, 'လက်ခံရရှိ 🎁')">လက်ခံရရှိ 🎁</button>
+          <button class="btn-decline" onclick="sendResponse(event, 'မယူဘူး ❌')">မယူဘူး ❌</button>
+        </div>
+      `;
+    }
+
+    function openGift() {
+      const giftBox = document.getElementById('giftBox');
+      const container = document.getElementById('giftBoxContainer');
+
+      if (!giftBox.classList.contains('open')) {
+        giftBox.classList.add('open');
+      }
+
+      const items = [
+        'အာဘွား 😘', 'အာဘွား 💋', 'အာဘွား ✨', 'အာဘွား 💖', 
+        '🔊', '🎶', '🎵', '💋', '😚', '🔊🎶', '😘', '💕'
+      ];
+      
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const particle = document.createElement('div');
+          particle.className = 'flying-kiss';
+          particle.innerText = items[Math.floor(Math.random() * items.length)];
+          
+          const angle = (Math.random() * 120 - 150) * (Math.PI / 180);
+          const distance = 120 + Math.random() * 150;
+          const tx = Math.cos(angle) * distance;
+          const ty = Math.sin(angle) * distance;
+
+          particle.style.left = '50%';
+          particle.style.top = '55%';
+          particle.style.setProperty('--tx', `${tx}px`);
+          particle.style.setProperty('--ty', `${ty}px`);
+          particle.style.animation = 'flyOut 2s ease-out forwards';
+          
+          container.appendChild(particle);
+
+          setTimeout(() => particle.remove(), 2000);
+        }, i * 60);
+      }
+    }
+
+    function sendResponse(event, answer) {
+      event.stopPropagation();
+      
+      const responseArea = document.getElementById('responseArea');
+      responseArea.innerHTML = `<span style="font-size:13px; color:#2c5364; font-weight:bold;">အဖြေပို့နေပါသည်... ⏳</span>`;
+
+      fetch("", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          "အဆင့် (၁) ရွေးချယ်မှု": `YES နှိပ်ခဲ့သည် (NO ကို ${step1NoClicks} ကြိမ်တိုင်တိုင် နှိပ်ခဲ့ပါသည်)`,
+          "အဆင့် (၂) ရွေးချယ်မှု": step2Choice || "YES 🥰",
+          "အဆင့် (၃) ရွေးချယ်မှု": step3Choice || "YES 💖",
+          "လက်ဆောင် ရွေးချယ်မှု": answer,
+          "ပို့သည့်အချိန်": new Date().toLocaleString()
+        })
+      })
+      .then(response => {
+        responseArea.innerHTML = `<span style="font-size:13px; color:#2ecc71; font-weight:bold;">အဖြေကို ပို့ပေးလိုက်ပါပြီ! ✨</span>`;
+      })
+      .catch(error => {
+        responseArea.innerHTML = `<span style="font-size:13px; color:#2ecc71; font-weight:bold;">အဖြေကို ပို့ပေးလိုက်ပါပြီ! ✨</span>`;
+      });
+    }
+  </script>
+</body>
+</html>
